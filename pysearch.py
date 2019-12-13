@@ -1,11 +1,12 @@
 from googlesearch import search
-import webbrowser
-import os
+from webbrowser import open
+from os import system
 from halo import Halo
-from termcolor import colored, cprint
-import requests
+from termcolor import colored
+from requests import get
+from bs4 import BeautifulSoup
 
-clear = lambda: os.system('cls')
+clear = lambda: system('cls')
 connection = 'None'
 spinner1 = Halo(text='Checking connection: ', text_color='cyan', spinner='dots' , placement='right')
 def logo():
@@ -29,7 +30,7 @@ while True:
         logo()
         spinner1.start()
         try:
-            requests.get('https://google.com')
+            get('https://google.com')
             spinner1.stop()
             print(colored('Checking connection: ', 'cyan', attrs=['bold']) + colored('Success!', 'green', attrs=['bold']))
             connection = 'success'
@@ -63,7 +64,11 @@ while True:
 for r in search(query, tld='com', lang='en', num=number, start=0, stop=number, pause=2.0):
     rNumber += 1
     results.append(r)
+    response = get(r)
+    soup = BeautifulSoup(response.text, 'lxml')
+    metas = soup.find_all('meta')
     print(f"\n{colored(rNumber, 'red', attrs=['bold'])}. {colored(r, 'cyan', attrs=['bold'])}")
+    print([ meta.attrs['content'] for meta in metas if 'name' in meta.attrs and meta.attrs['name'] == 'description' ])
 
 option = 'y'
 while True:
@@ -74,7 +79,7 @@ while True:
                 choice = int(choice)
                 if choice <= rNumber and choice > 0:
                     url = results[choice - 1]
-                    webbrowser.open(url, new=0, autoraise=True)
+                    open(url, new=0, autoraise=True)
                     option = input('Continue (y/n): ')
                     break
                 else:
@@ -88,5 +93,5 @@ while True:
     else:
         print('\nPlease choose valid a option!')
         option = input('Continue (y/n): ')
-os.system('del .google-cookie')
+system('del .google-cookie')
 clear()
