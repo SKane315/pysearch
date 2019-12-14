@@ -68,7 +68,8 @@ for r in search(query, tld='com', lang='en', num=number, start=0, stop=number, p
     soup = BeautifulSoup(response.text, 'lxml')
     metas = soup.find_all('meta')
     print(f"\n{colored(rNumber, 'red', attrs=['bold'])}. {colored(r, 'cyan', attrs=['bold'])}")
-    print([ meta.attrs['content'] for meta in metas if 'name' in meta.attrs and meta.attrs['name'] == 'description' ])
+    description = [ meta.attrs['content'] for meta in metas if 'name' in meta.attrs and meta.attrs['name'] == 'description' ]
+    [ print(x) for x in description ]
 
 option = 'y'
 while True:
