@@ -1,12 +1,19 @@
 from googlesearch import search
 from webbrowser import open
-from os import system
 from halo import Halo
 from termcolor import colored
 from requests import get
 from bs4 import BeautifulSoup
+import os, platform
 
-clear = lambda: system('cls')
+
+if platform.system() == 'Windows':
+    clear = lambda: os.system('cls')
+
+else:
+    clear = lambda: os.system('clear')
+
+
 connection = 'None'
 spinner1 = Halo(text='Checking connection: ', text_color='cyan', spinner='dots' , placement='right')
 def logo():
@@ -94,5 +101,5 @@ while True:
     else:
         print('\nPlease choose valid a option!')
         option = input('Continue (y/n): ')
-system('del .google-cookie')
+os.system('del .google-cookie')
 clear()
