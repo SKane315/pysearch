@@ -6,7 +6,7 @@ Python3
 
 # Usage for pysearch.py:
 ```
-$ git clone https://github.com/SKane315/pysearch.git
+$ git clone https://github.com/Synth9283/pysearch.git
 $ cd pysearch
 $ pip install -r requirements.txt
 $ pysearch.py
