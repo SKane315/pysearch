@@ -1,5 +1,5 @@
 # pysearch
-A script made by SKane that allows you to search for google results through the Command Prompt or Powershell
+A script made by Synth that allows you to search for google results through the Command Prompt or Powershell
 
 # Requirements:
 Python3
